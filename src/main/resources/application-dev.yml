@@ -1,0 +1,16 @@
+spring:
+    profiles:
+        active: dev
+
+    redis:
+      main:
+        database: 0
+        hostName: 47.104.190.7
+        port: 6379
+        password: admin123
+
+
+
+
+
+

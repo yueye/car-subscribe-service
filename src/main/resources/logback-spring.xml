@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--引入默认的一些设置-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="LOG_PATH" value="${catalina.base}"/>
+
+    <!--写入日志到控制台的appender,用默认的,但是要去掉charset,否则windows下tomcat下乱码-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名,每天一个文件-->
+            <FileNamePattern>${LOG_PATH}/main.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--异步到文件-->
+    <appender name="asyncFileAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>500</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
+	
+	<appender name="vgs" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${sysLog}-exception.log              </File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${sysLog}/%d{yyyy-MM-dd}exception.log</fileNamePattern><maxHistory>12</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"><level>INFO</level><onMatch>ACCEPT</onMatch><onMismatch>DENY</onMismatch></filter>
+		<encoder charset="UTF-8"><pattern>%msg%n</pattern><charset>UTF-8</charset></encoder>
+	</appender>
+	<logger additivity="false" name="com.lenovo.base.WorkerException$ExceptionJson" level="INFO"><appender-ref ref="vgs" /></logger>
+
+<!-- 业务开始 -->
+  <appender name="error"             class="ch.qos.logback.core.rolling.RollingFileAppender"><File>${LOG_PATH}/background/error.log              </File><rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><fileNamePattern>${LOG_PATH}/background/%d{yyyy-MM-dd}error.log            </fileNamePattern><maxHistory>12</maxHistory></rollingPolicy><filter class="ch.qos.logback.classic.filter.LevelFilter"><level>INFO</level><onMatch>ACCEPT</onMatch><onMismatch>DENY</onMismatch></filter><encoder charset="UTF-8"><pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %level | %msg%n</pattern><charset>UTF-8</charset></encoder></appender>
+  <appender name="create"            class="ch.qos.logback.core.rolling.RollingFileAppender"><File>${LOG_PATH}/background/create.log             </File><rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><fileNamePattern>${LOG_PATH}/background/%d{yyyy-MM-dd}create.log            </fileNamePattern><maxHistory>12</maxHistory></rollingPolicy><filter class="ch.qos.logback.classic.filter.LevelFilter"><level>INFO</level><onMatch>ACCEPT</onMatch><onMismatch>DENY</onMismatch></filter><encoder charset="UTF-8"><pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %level | %msg%n</pattern><charset>UTF-8</charset></encoder></appender>
+  
+  <logger additivity="false" name="com.sxsd.base.WorkerException" 	                      level="INFO"><appender-ref ref="error"    	       /></logger>
+  <logger additivity="false" name="com.sxsd.car.create.controller.CreateController" 	  level="INFO"><appender-ref ref="create"    	       /></logger>
+	 
+<!-- 业务结束 -->
+
+    <logger name="net.sf.ehcache" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+    <logger name="org.apache.myfaces" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="com.sxsd" level="INFO"/>
+	
+	 
+    <!--生产环境:打印控制台和输出到文件-->
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!--开发环境:打印控制台-->
+    <springProfile name="dev">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!--测试环境:打印控制台-->
+    <springProfile name="test">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+</configuration>

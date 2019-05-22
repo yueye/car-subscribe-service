@@ -1,0 +1,26 @@
+server:
+    tomcat:
+        access-log-enabled: true
+        max-threads: 1000
+        min-spare-threads: 30
+        uri-encoding: UTF-8
+    
+spring:
+    profiles:
+        active: dev
+        
+    redis:
+        timeout: 0
+        pool:
+            max-active: 8
+            max-wait: -1
+            max-idle: 0
+    http:
+      encoding:
+        force: true
+        charset: UTF-8
+        enabled: true
+logging:
+    level:
+        org.springframework: ERROR
+
