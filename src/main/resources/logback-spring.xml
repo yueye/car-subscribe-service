@@ -40,12 +40,8 @@
 	<logger additivity="false" name="com.lenovo.base.WorkerException$ExceptionJson" level="INFO"><appender-ref ref="vgs" /></logger>
 
 <!-- 业务开始 -->
-  <appender name="error"             class="ch.qos.logback.core.rolling.RollingFileAppender"><File>${LOG_PATH}/background/error.log              </File><rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><fileNamePattern>${LOG_PATH}/background/%d{yyyy-MM-dd}error.log            </fileNamePattern><maxHistory>12</maxHistory></rollingPolicy><filter class="ch.qos.logback.classic.filter.LevelFilter"><level>INFO</level><onMatch>ACCEPT</onMatch><onMismatch>DENY</onMismatch></filter><encoder charset="UTF-8"><pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %level | %msg%n</pattern><charset>UTF-8</charset></encoder></appender>
-  <appender name="create"            class="ch.qos.logback.core.rolling.RollingFileAppender"><File>${LOG_PATH}/background/create.log             </File><rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><fileNamePattern>${LOG_PATH}/background/%d{yyyy-MM-dd}create.log            </fileNamePattern><maxHistory>12</maxHistory></rollingPolicy><filter class="ch.qos.logback.classic.filter.LevelFilter"><level>INFO</level><onMatch>ACCEPT</onMatch><onMismatch>DENY</onMismatch></filter><encoder charset="UTF-8"><pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %level | %msg%n</pattern><charset>UTF-8</charset></encoder></appender>
-  
-  <logger additivity="false" name="com.sxsd.base.WorkerException" 	                      level="INFO"><appender-ref ref="error"    	       /></logger>
-  <logger additivity="false" name="com.sxsd.car.create.controller.CreateController" 	  level="INFO"><appender-ref ref="create"    	       /></logger>
-	 
+
+
 <!-- 业务结束 -->
 
     <logger name="net.sf.ehcache" level="WARN"/>
