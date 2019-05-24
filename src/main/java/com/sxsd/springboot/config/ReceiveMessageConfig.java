@@ -20,8 +20,8 @@ import java.util.concurrent.CountDownLatch;
 public class ReceiveMessageConfig {
 
 	private static final Logger log =  LoggerFactory.getLogger(ReceiveMessageConfig.class);
-	private static final String APPKEY = ResourceBundleUtil.get("ezvizopen.appkey");
-	private static final String SECRET = ResourceBundleUtil.get("ezvizopen.appSecret");
+	private static final String APP_KEY = ResourceBundleUtil.get("ezvizopen.appkey");
+	private static final String APP_SECRET = ResourceBundleUtil.get("ezvizopen.appSecret");
 
 	@Resource(name="taskExecutor")
 	protected ThreadPoolTaskExecutor executor;
@@ -31,7 +31,7 @@ public class ReceiveMessageConfig {
 	public void exe() {
 		CountDownLatch latch = new CountDownLatch(1);
 		//初始化客户端并设置回调
-		EzvizOpenClientBuilder.init(APPKEY, SECRET, executor.getThreadPoolExecutor(), new AbstractMessageCallBack() {
+		EzvizOpenClientBuilder.init(APP_KEY, APP_SECRET, executor.getThreadPoolExecutor(), new AbstractMessageCallBack() {
 
 			/**
 			 * 获取车辆检测消息回调方法（可选）
