@@ -26,14 +26,9 @@ import java.util.concurrent.CountDownLatch;
 
 @Configuration
 public class ReceiveMessageConfig {
+
 	private static final Logger log =  LoggerFactory.getLogger(ReceiveMessageConfig.class);
-	/**
-	 * 请输入申请的AppKey
-	 */
 	private static final String APPKEY = ResourceBundleUtil.get("receiveMessage.appkey");
-	/**
-	 * 请输入申请的Secret
-	 */
 	private static final String SECRET = ResourceBundleUtil.get("receiveMessage.secert");
 
 	@Resource(name="taskExecutor")
