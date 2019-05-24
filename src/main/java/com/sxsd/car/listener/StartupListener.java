@@ -1,6 +1,7 @@
 package com.sxsd.car.listener;
 
 import com.sxsd.car.utils.OSUtil;
+import com.sxsd.car.utils.ResourceBundleUtil;
 import com.sxsd.springboot.config.ReceiveMessageConfig;
 import com.sxsd.springboot.config.WebConfig;
 import org.slf4j.Logger;
@@ -10,7 +11,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.ResourceBundle;
 
 public class StartupListener implements ServletContextListener {
 
@@ -29,12 +29,12 @@ public class StartupListener implements ServletContextListener {
     }
 	private void ini(ApplicationContext ctx) {
 		WebConfig webConfig=(WebConfig) ctx.getBean("webConfig");
-		version=ResourceBundle.getBundle("mail").getString("version");
-		appName=ResourceBundle.getBundle("mail").getString("appName");
-		isProd=webConfig.isProd();
-		ip= OSUtil.getLocalIP();
-		String[] ips=ip.split("\\.");
-		String vip=ips[3]+","+version;
+		version = ResourceBundleUtil.get("version","mail");
+		appName = ResourceBundleUtil.get("appName","mail");
+		isProd = webConfig.isProd();
+		ip = OSUtil.getLocalIP();
+		String[] ips = ip.split("\\.");
+		String vip = ips[3]+","+version;
 		log.info("vip:"+vip+",isProd:"+isProd);
 	}
     public void contextDestroyed(ServletContextEvent event) {}

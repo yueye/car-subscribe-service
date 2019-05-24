@@ -5,23 +5,15 @@ import com.ezviz.open.callback.AbstractMessageCallBack;
 import com.ezviz.open.client.EzvizOpenClientBuilder;
 import com.ezviz.open.model.EzvizVehicleMessage;
 import com.ezviz.open.model.MessageContent;
-import com.sxsd.car.listener.StartupListener;
 import com.sxsd.car.redis.RedisMsg;
 import com.sxsd.car.utils.ResourceBundleUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.EventListener;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 @Configuration

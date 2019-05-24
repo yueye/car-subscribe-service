@@ -12,12 +12,13 @@ public class ResourceBundleUtil {
 	private static final String default_config = "config";
 	
 	public static String get(String key){
-		return get(key,default_config,null);
+		return get(key,default_config);
 	}
 	
 	public static String get(String key,String file){
 		return get(key,file,null);
 	}
+
 	public static String get(String key,String file,String defaultKey){
 		try{
 			ResourceBundle rb = ResourceBundle.getBundle(file);
@@ -32,6 +33,7 @@ public class ResourceBundleUtil {
 		}
 		return "";
 	}
+
 	public static Boolean containsKey(String key){
 		ResourceBundle rb = ResourceBundle.getBundle(default_config);
 		if(rb.containsKey(key)){
