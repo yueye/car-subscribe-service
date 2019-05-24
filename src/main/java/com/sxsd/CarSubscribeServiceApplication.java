@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 入口1
  */
 @SpringBootApplication
-public class CarQueueProcessorServiceApplication {
+public class CarSubscribeServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CarQueueProcessorServiceApplication.class, args);
+        SpringApplication.run(CarSubscribeServiceApplication.class, args);
     }
 
 }

@@ -23,11 +23,11 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @author liujx
  * @create 2019/5/14
  */
-@EnableAsync
 @Configuration
 public class TaskPoolConfig {
+
     @Bean("taskExecutor")
-    public Executor taskExecutor() {
+    public ThreadPoolTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10);
         executor.setMaxPoolSize(20);

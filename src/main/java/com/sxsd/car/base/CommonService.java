@@ -10,7 +10,6 @@
 package com.sxsd.car.base;
 
 import com.sxsd.base.SuperLog;
-import com.sxsd.car.redis.RedisPay;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -22,7 +21,5 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CommonService {
     @Autowired
     protected SuperLog superLog;
-    @Autowired
-    protected RedisPay redisPay;
 
 }
