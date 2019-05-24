@@ -20,8 +20,8 @@ import java.util.concurrent.CountDownLatch;
 public class ReceiveMessageConfig {
 
 	private static final Logger log =  LoggerFactory.getLogger(ReceiveMessageConfig.class);
-	private static final String APPKEY = ResourceBundleUtil.get("receiveMessage.appkey");
-	private static final String SECRET = ResourceBundleUtil.get("receiveMessage.secert");
+	private static final String APPKEY = ResourceBundleUtil.get("ezvizopen.appkey");
+	private static final String SECRET = ResourceBundleUtil.get("ezvizopen.appSecret");
 
 	@Resource(name="taskExecutor")
 	protected ThreadPoolTaskExecutor executor;
