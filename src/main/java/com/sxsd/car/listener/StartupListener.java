@@ -2,7 +2,6 @@ package com.sxsd.car.listener;
 
 import com.sxsd.car.utils.OSUtil;
 import com.sxsd.car.utils.ResourceBundleUtil;
-import com.sxsd.springboot.config.ReceiveMessageConfig;
 import com.sxsd.springboot.config.WebConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +22,8 @@ public class StartupListener implements ServletContextListener {
         ApplicationContext ctx =WebApplicationContextUtils.getRequiredWebApplicationContext(event.getServletContext());
         ini(ctx);
         /*自定义代码开始*/
-		ReceiveMessageConfig receiveMessageConfig = (ReceiveMessageConfig)ctx.getBean("receiveMessageConfig");
-		receiveMessageConfig.exe();
+		//ReceiveMessageConfig receiveMessageConfig = (ReceiveMessageConfig)ctx.getBean("receiveMessageConfig");
+		//receiveMessageConfig.exe();
 		/*自定义代码结束*/
     }
 	private void ini(ApplicationContext ctx) {
