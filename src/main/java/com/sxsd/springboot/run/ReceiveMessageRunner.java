@@ -17,10 +17,13 @@ package com.sxsd.springboot.run;
  */
 
 import com.alibaba.fastjson.JSON;
+import com.sxsd.base.Constants;
 import com.sxsd.car.redis.RedisMsg;
 import com.sxsd.car.utils.DateUtil;
 import com.sxsd.car.utils.ResourceBundleUtil;
 import com.sxsd.car.utils.http.HttpClientUtil;
+import com.sxsd.springboot.thread.PostLedThread;
+import com.sxsd.springboot.vo.ConsumerCallBackVo;
 import com.ys.product.ysmq.front.msg.StandardConsumerMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -134,11 +137,14 @@ public class ReceiveMessageRunner implements CommandLineRunner {
         }
         for (Object object : msgs) {
             log.info("原始消息："+JSON.toJSONString(object));
-            //ConsumerCallBackVo vo = JSON.parseObject(object.toString(), ConsumerCallBackVo.class);
-            //log.info("my vo "+ JSON.toJSONString(vo));
-            //if(VEHICLE.equals(vo.getHead().getType())){//车辆信息通知
-               // httpClientExecutor.execute(new PostLedThread(log,vo));
-            //}
+            ConsumerCallBackVo vo = JSON.parseObject(object.toString(), ConsumerCallBackVo.class);
+            log.info("my vo "+ JSON.toJSONString(vo));
+//            if(Constants.VEHICLE_PLATE.equals(vo.getHead().getType())){//车辆信息通知
+//                httpClientExecutor.execute(new PostLedThread(log,vo));
+//            }
+            if(Constants.IS_API.equals(vo.getHead().getType())){//isapi
+                httpClientExecutor.execute(new PostLedThread(log,vo));
+            }
 
         }
     }

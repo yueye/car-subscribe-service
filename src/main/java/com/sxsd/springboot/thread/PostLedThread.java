@@ -10,9 +10,9 @@
 package com.sxsd.springboot.thread;
 
 import com.alibaba.fastjson.JSON;
+import com.sxsd.car.utils.ConvertUtils;
 import com.sxsd.car.utils.http.HttpClientUtil;
 import com.sxsd.springboot.vo.ConsumerCallBackVo;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 
 import java.util.HashMap;
@@ -40,12 +40,13 @@ public class PostLedThread implements Runnable {
 
     @Override
     public void run() {
-        if(StringUtils.isBlank(consumerCallBackVo.getBody().getPlateNumber())){
+        Map<String,String> map = ConvertUtils.getVehicle(consumerCallBackVo);
+        if(!map.containsKey("deviceId") || !map.containsKey("plateNumber")){
             return ;
         }
         Map<String,String> params = new HashMap<>();
         params.put("ledLink",ledLink);
-        params.put("line1",consumerCallBackVo.getBody().getPlateNumber());
+        params.put("line1",map.get("deviceId"));
         params.put("line2","进来了");
         params.put("type","2");
         logger.info("发送led网关 请求参数："+url+" "+ JSON.toJSONString(params));

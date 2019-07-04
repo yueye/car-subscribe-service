@@ -90,6 +90,78 @@ public class ConsumerCallBackVo {
         private String msgSeq;
         private String plateNumber;
 
+        public String getDevType() {
+            return devType;
+        }
+
+        public void setDevType(String devType) {
+            this.devType = devType;
+        }
+
+        public String getRegTime() {
+            return regTime;
+        }
+
+        public void setRegTime(String regTime) {
+            this.regTime = regTime;
+        }
+
+        public String getNatIp() {
+            return natIp;
+        }
+
+        public void setNatIp(String natIp) {
+            this.natIp = natIp;
+        }
+
+        public String getMsgType() {
+            return msgType;
+        }
+
+        public void setMsgType(String msgType) {
+            this.msgType = msgType;
+        }
+
+        public String getSubSerial() {
+            return subSerial;
+        }
+
+        public void setSubSerial(String subSerial) {
+            this.subSerial = subSerial;
+        }
+
+        public String getOccurTime() {
+            return occurTime;
+        }
+
+        public void setOccurTime(String occurTime) {
+            this.occurTime = occurTime;
+        }
+
+        public String getDeviceName() {
+            return deviceName;
+        }
+
+        public void setDeviceName(String deviceName) {
+            this.deviceName = deviceName;
+        }
+
+        public String getDasId() {
+            return dasId;
+        }
+
+        public void setDasId(String dasId) {
+            this.dasId = dasId;
+        }
+
+        public String getPayload() {
+            return payload;
+        }
+
+        public void setPayload(String payload) {
+            this.payload = payload;
+        }
+
         public String getPicUrl() {
             return picUrl;
         }
