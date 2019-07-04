@@ -21,8 +21,6 @@ import com.sxsd.car.redis.RedisMsg;
 import com.sxsd.car.utils.DateUtil;
 import com.sxsd.car.utils.ResourceBundleUtil;
 import com.sxsd.car.utils.http.HttpClientUtil;
-import com.sxsd.springboot.thread.PostLedThread;
-import com.sxsd.springboot.vo.ConsumerCallBackVo;
 import com.ys.product.ysmq.front.msg.StandardConsumerMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +45,7 @@ public class ReceiveMessageRunner implements CommandLineRunner {
     private static final String APP_KEY = ResourceBundleUtil.get("ezvizopen.appkey");
     private static final String APP_SECRET = ResourceBundleUtil.get("ezvizopen.appSecret");
     private static final Logger log =  LoggerFactory.getLogger(ReceiveMessageRunner.class);
-    private static final String GROUP = "group3";
+    private static final String GROUP = "group1";
     private static final String PATH = "https://open.ys7.com"; //开放平台的url,这是test环境的url https://test.ys7.com:65
     private static final long consumeIntervalTime = 200;
     private static final String VEHICLE = "ys.open.vehicle";
@@ -135,11 +133,12 @@ public class ReceiveMessageRunner implements CommandLineRunner {
             log.info("msgSize:{},msg:{}", msgs.size(), msgs);
         }
         for (Object object : msgs) {
-            ConsumerCallBackVo vo = JSON.parseObject(object.toString(), ConsumerCallBackVo.class);
-            log.info("my vo "+ JSON.toJSONString(vo));
-            if(VEHICLE.equals(vo.getHead().getType())){//车辆信息通知
-                httpClientExecutor.execute(new PostLedThread(log,vo));
-            }
+            log.info("原始消息："+JSON.toJSONString(object));
+            //ConsumerCallBackVo vo = JSON.parseObject(object.toString(), ConsumerCallBackVo.class);
+            //log.info("my vo "+ JSON.toJSONString(vo));
+            //if(VEHICLE.equals(vo.getHead().getType())){//车辆信息通知
+               // httpClientExecutor.execute(new PostLedThread(log,vo));
+            //}
 
         }
     }

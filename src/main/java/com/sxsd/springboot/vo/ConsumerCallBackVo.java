@@ -21,9 +21,13 @@ public class ConsumerCallBackVo {
 
 
     public static class HeadVo{
+        //通道id 0
         private String channelNo;
+        //消息id 5d1b4af9e2c9ca0323e2894c
         private String messageId;
-        private String type;//ys.open.vehicle
+        //消息类型 Constants
+        private String type;
+        //设备号 D28746868
         private String deviceId;
 
         public String getChannelNo() {
@@ -60,6 +64,27 @@ public class ConsumerCallBackVo {
     }
 
     public static class BodyVo{
+        //设备类型 DS-2CDVT-FZCMP-S
+        private String devType;
+        //注册时间 2019-06-25 12:39:32
+        private String regTime;
+        //ip地址 60.247.104.85
+        private String natIp;
+        //消息类型 OFFLINE
+        private String msgType;
+        //序列号 D28746868
+        private String subSerial;
+        //触发时间 2019-07-02 20:15:52
+        private String occurTime;
+        //设备名称
+        private String deviceName;
+        //dasId das_10.215.131.22_6807
+        private String dasId;
+
+        //payload ys.open.isapi专用
+        private String payload;
+
+
         private String picUrl;
         private String detectTime;
         private String msgSeq;
