@@ -28,16 +28,6 @@
         <queueSize>500</queueSize>
         <appender-ref ref="FILE"/>
     </appender>
-	
-	<appender name="vgs" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${sysLog}-exception.log              </File>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${sysLog}/%d{yyyy-MM-dd}exception.log</fileNamePattern><maxHistory>12</maxHistory>
-		</rollingPolicy>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter"><level>INFO</level><onMatch>ACCEPT</onMatch><onMismatch>DENY</onMismatch></filter>
-		<encoder charset="UTF-8"><pattern>%msg%n</pattern><charset>UTF-8</charset></encoder>
-	</appender>
-	<logger additivity="false" name="com.lenovo.base.WorkerException$ExceptionJson" level="INFO"><appender-ref ref="vgs" /></logger>
 
 <!-- 业务开始 -->
 
@@ -46,10 +36,10 @@
 
     <logger name="net.sf.ehcache" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
-    <logger name="org.apache.myfaces" level="WARN"/>
     <logger name="org.springframework" level="WARN"/>
     <logger name="com.sxsd" level="INFO"/>
-	
+    <!--<logger name="com.ys" level="DEBUG"/> -->
+
 	 
     <!--生产环境:打印控制台和输出到文件-->
     <springProfile name="prod">
