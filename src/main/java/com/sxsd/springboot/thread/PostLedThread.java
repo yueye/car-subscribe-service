@@ -46,7 +46,7 @@ public class PostLedThread implements Runnable {
         }
         Map<String,String> params = new HashMap<>();
         params.put("ledLink",ledLink);
-        params.put("line1",map.get("deviceId"));
+        params.put("line1",map.get("plateNumber"));
         params.put("line2","进来了");
         params.put("type","2");
         logger.info("发送led网关 请求参数："+url+" "+ JSON.toJSONString(params));

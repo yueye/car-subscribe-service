@@ -28,15 +28,15 @@ public class ConvertUtils {
         if(vo == null){
             return map;
         }
-        if(Constants.IS_API.equals(vo.getHead().getType())){
-            map.put("deviceId",vo.getHead().getDeviceId());
+        if(Constants.IS_API.equals(vo.getHeader().getType())){
+            map.put("deviceId",vo.getHeader().getDeviceId());
             EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)XMLObjectUtils.xmlToObj(EventNotificationAlert.class,vo.getBody().getPayload());
             if("vehicle".equals(eventNotificationAlert.getANPR().getVehicleType())){
                 map.put("plateNumber",eventNotificationAlert.getANPR().getLicensePlate());
             }
         }
-        if(Constants.VEHICLE_PLATE.equals(vo.getHead().getType())){
-            map.put("deviceId",vo.getHead().getDeviceId());
+        if(Constants.VEHICLE_PLATE.equals(vo.getHeader().getType())){
+            map.put("deviceId",vo.getHeader().getDeviceId());
             map.put("plateNumber",vo.getBody().getPlateNumber());
         }
         return map;

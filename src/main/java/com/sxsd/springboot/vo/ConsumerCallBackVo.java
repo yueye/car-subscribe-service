@@ -16,7 +16,7 @@ package com.sxsd.springboot.vo;
  * @create 2019/7/1
  */
 public class ConsumerCallBackVo {
-    private HeadVo head;
+    private HeadVo header;
     private BodyVo body;
 
 
@@ -195,12 +195,12 @@ public class ConsumerCallBackVo {
         }
     }
 
-    public HeadVo getHead() {
-        return head;
+    public HeadVo getHeader() {
+        return header;
     }
 
-    public void setHead(HeadVo head) {
-        this.head = head;
+    public void setHeader(HeadVo header) {
+        this.header = header;
     }
 
     public BodyVo getBody() {

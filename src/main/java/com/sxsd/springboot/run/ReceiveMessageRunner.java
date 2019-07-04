@@ -48,7 +48,7 @@ public class ReceiveMessageRunner implements CommandLineRunner {
     private static final String APP_KEY = ResourceBundleUtil.get("ezvizopen.appkey");
     private static final String APP_SECRET = ResourceBundleUtil.get("ezvizopen.appSecret");
     private static final Logger log =  LoggerFactory.getLogger(ReceiveMessageRunner.class);
-    private static final String GROUP = "group1";
+    private static final String GROUP = "group4";
     private static final String PATH = "https://open.ys7.com"; //开放平台的url,这是test环境的url https://test.ys7.com:65
     private static final long consumeIntervalTime = 200;
     private static final String VEHICLE = "ys.open.vehicle";
@@ -142,7 +142,7 @@ public class ReceiveMessageRunner implements CommandLineRunner {
 //            if(Constants.VEHICLE_PLATE.equals(vo.getHead().getType())){//车辆信息通知
 //                httpClientExecutor.execute(new PostLedThread(log,vo));
 //            }
-            if(Constants.IS_API.equals(vo.getHead().getType())){//isapi
+            if(Constants.IS_API.equals(vo.getHeader().getType())){//isapi
                 httpClientExecutor.execute(new PostLedThread(log,vo));
             }
 
