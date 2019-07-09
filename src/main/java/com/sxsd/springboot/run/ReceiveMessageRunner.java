@@ -130,18 +130,16 @@ public class ReceiveMessageRunner implements CommandLineRunner {
      */
     static void userProcessMsgFunction(ThreadPoolTaskExecutor httpClientExecutor,List<Object> msgs) {
         if (msgs.size() > 100) {
-            //消息太多,只打印前100个
+//            //消息太多,只打印前100个
             log.info("msgSize:{},msg:{}", msgs.size(), msgs.subList(0, 100));
-        } else {
-            log.info("msgSize:{},msg:{}", msgs.size(), msgs);
         }
+//        else {
+//            log.info("msgSize:{},msg:{}", msgs.size(), msgs);
+//        }
         for (Object object : msgs) {
             log.info("原始消息："+JSON.toJSONString(object));
             ConsumerCallBackVo vo = JSON.parseObject(object.toString(), ConsumerCallBackVo.class);
-            log.info("my vo "+ JSON.toJSONString(vo));
-//            if(Constants.VEHICLE_PLATE.equals(vo.getHead().getType())){//车辆信息通知
-//                httpClientExecutor.execute(new PostLedThread(log,vo));
-//            }
+            //log.info("my vo "+ JSON.toJSONString(vo));
             if(Constants.IS_API.equals(vo.getHeader().getType())){//isapi
                 httpClientExecutor.execute(new PostLedThread(log,vo));
             }

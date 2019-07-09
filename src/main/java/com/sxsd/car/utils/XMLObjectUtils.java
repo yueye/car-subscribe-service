@@ -1,31 +1,46 @@
 package com.sxsd.car.utils;
 
-import com.alibaba.fastjson.JSON;
-import com.sxsd.springboot.vo.EventNotificationAlert;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 
 public class XMLObjectUtils {
 
     public static void main(String [] args){
-        String str = "<EventNotificationAlert version=\"2.0\" xmlns=\"http://www.std-cgi.com/ver20/XMLSchema\">" +
-                "<ipAddress>192.168.1.171</ipAddress>" +
-                "<eventType>ANPR</eventType>" +
-                "<ANPR>" +
-                "<licensePlate>蓝京Q37MQ0</licensePlate>" +
-                "<line>1</line>" +
-                "<vehicleType>vehicle</vehicleType>" +
-                "</ANPR>" +
-                "</EventNotificationAlert>";
-        System.out.println(str);
-        EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)xmlToObj(EventNotificationAlert.class,str);
-        System.out.println(JSON.toJSONString(eventNotificationAlert));
+        File file = new File("C:\\Users\\admin\\Desktop\\x项目\\错误xml.TXT");
+        Long filelength = file.length();
+        byte[] filecontent = new byte[filelength.intValue()];
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(filecontent);
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String s = new String(filecontent);
+        System.out.println("原始:"+s);
+
+        System.out.println("过滤后:"+s.replaceAll("\\\\u00",""));
+
+    //        String str = "<EventNotificationAlert version=\"2.0\" xmlns=\"http://www.std-cgi.com/ver20/XMLSchema\">" +
+//                "<ipAddress>192.168.1.171</ipAddress>" +
+//                "<eventType>ANPR</eventType>" +
+//                "<ANPR>" +
+//                "<licensePlate>蓝京Q37MQ0</licensePlate>" +
+//                "<line>1</line>" +
+//                "<vehicleType>vehicle</vehicleType>" +
+//                "</ANPR>" +
+//                "</EventNotificationAlert>";
+//        System.out.println(str);
+       // EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)xmlToObj(EventNotificationAlert.class,new String(filecontent));
+        // System.out.println(JSON.toJSONString(eventNotificationAlert));
     }
     /**
      * 方法名称: xmlMappedObj<br>

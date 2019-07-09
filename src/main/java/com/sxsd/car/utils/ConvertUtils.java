@@ -30,7 +30,9 @@ public class ConvertUtils {
         }
         if(Constants.IS_API.equals(vo.getHeader().getType())){
             map.put("deviceId",vo.getHeader().getDeviceId());
-            EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)XMLObjectUtils.xmlToObj(EventNotificationAlert.class,vo.getBody().getPayload());
+            //处理特殊字符
+            String payload = vo.getBody().getPayload().replaceAll("\\\\u00","");
+            EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)XMLObjectUtils.xmlToObj(EventNotificationAlert.class,payload);
             if("vehicle".equals(eventNotificationAlert.getANPR().getVehicleType())){
                 map.put("plateNumber",eventNotificationAlert.getANPR().getLicensePlate());
             }
