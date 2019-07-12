@@ -28,18 +28,22 @@ public class ConvertUtils {
         if(vo == null){
             return map;
         }
+        map.put("deviceId",vo.getHeader().getDeviceId());
         if(Constants.IS_API.equals(vo.getHeader().getType())){
-            map.put("deviceId",vo.getHeader().getDeviceId());
             //处理特殊字符
-            String payload = vo.getBody().getPayload().replaceAll("\\\\u00","");
+            String payload = vo.getBody().getPayload().replaceAll("\\\\u00","").replaceAll("`","");
             EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)XMLObjectUtils.xmlToObj(EventNotificationAlert.class,payload);
             if("vehicle".equals(eventNotificationAlert.getANPR().getVehicleType())){
                 map.put("plateNumber",eventNotificationAlert.getANPR().getLicensePlate());
             }
         }
         if(Constants.VEHICLE_PLATE.equals(vo.getHeader().getType())){
-            map.put("deviceId",vo.getHeader().getDeviceId());
             map.put("plateNumber",vo.getBody().getPlateNumber());
+            map.put("picUrl",vo.getBody().getPicUrl());
+        }
+        if(Constants.CAR_API.equals(vo.getHeader().getType())){
+            map.put("plateNumber",vo.getBody().getResults().get(0).getPlateNumber());
+            map.put("picUrl",vo.getBody().getPicUrl());
         }
         return map;
     }

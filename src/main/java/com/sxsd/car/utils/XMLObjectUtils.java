@@ -8,11 +8,13 @@ import org.dom4j.Element;
 import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class XMLObjectUtils {
 
     public static void main(String [] args){
-        File file = new File("C:\\Users\\admin\\Desktop\\x项目\\错误xml.TXT");
+        File file = new File("C:\\Users\\admin\\Desktop\\x项目\\xml解析问题\\xml解析错误2.txt");
         Long filelength = file.length();
         byte[] filecontent = new byte[filelength.intValue()];
         try {
@@ -25,9 +27,13 @@ public class XMLObjectUtils {
             e.printStackTrace();
         }
         String s = new String(filecontent);
-        System.out.println("原始:"+s);
+        String ss = "\u0010B]_Q`Q";
+        System.out.println("过滤:"+stripNonValidXMLCharacters(ss));
 
-        System.out.println("过滤后:"+s.replaceAll("\\\\u00",""));
+//        System.out.println("原始:"+s);
+//        System.out.println("原始:"+replaceUnicode(s));
+//
+//        System.out.println("过滤后:"+s.replaceAll("\\\\u00","").replaceAll("`",""));
 
     //        String str = "<EventNotificationAlert version=\"2.0\" xmlns=\"http://www.std-cgi.com/ver20/XMLSchema\">" +
 //                "<ipAddress>192.168.1.171</ipAddress>" +
@@ -41,6 +47,36 @@ public class XMLObjectUtils {
 //        System.out.println(str);
        // EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)xmlToObj(EventNotificationAlert.class,new String(filecontent));
         // System.out.println(JSON.toJSONString(eventNotificationAlert));
+    }
+
+
+    public static String replaceUnicode(String sourceStr)
+    {
+        String regEx= "["+
+                "\u0000-\u001F"+//：C0控制符及基本拉丁文 (C0 Control and Basic Latin)
+                "\u007F-\u00A0" +//：特殊 (Specials);
+                "]";
+        Pattern pattern= Pattern.compile(regEx);
+        Matcher matcher=pattern.matcher(sourceStr);
+        return matcher.replaceAll("");
+    }
+
+    public static String stripNonValidXMLCharacters(String in) {
+        StringBuffer out = new StringBuffer(); // Used to hold the output.
+        char current; // Used to reference the current character.
+
+        if (in == null || ("".equals(in))) return ""; // vacancy test.
+        for (int i = 0; i < in.length(); i++) {
+            current = in.charAt(i); // NOTE: No IndexOutOfBoundsException caught here; it should not happen.
+            if ((current == 0x9) ||
+                    (current == 0xA) ||
+                    (current == 0xD) ||
+                    ((current >= 0x20) && (current <= 0xD7FF)) ||
+                    ((current >= 0xE000) && (current <= 0xFFFD)) ||
+                    ((current >= 0x10000) && (current <= 0x10FFFF)))
+                out.append(current);
+        }
+        return out.toString();
     }
     /**
      * 方法名称: xmlMappedObj<br>

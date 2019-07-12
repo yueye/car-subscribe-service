@@ -9,6 +9,8 @@
  */
 package com.sxsd.springboot.vo;
 
+import java.util.List;
+
 /**
  * 〈〉
  *
@@ -21,6 +23,8 @@ public class ConsumerCallBackVo {
 
 
     public static class HeadVo{
+        //1562666785589
+        private String messageTime;
         //通道id 0
         private String channelNo;
         //消息id 5d1b4af9e2c9ca0323e2894c
@@ -84,11 +88,17 @@ public class ConsumerCallBackVo {
         //payload ys.open.isapi专用
         private String payload;
 
-
+        //图片地址
         private String picUrl;
+        //发生时间
         private String detectTime;
+        //消息序列
         private String msgSeq;
+        //车牌号
         private String plateNumber;
+
+        //ys.open.car时有结果
+        private List<ResultsVo> results;
 
         public String getDevType() {
             return devType;
@@ -192,6 +202,162 @@ public class ConsumerCallBackVo {
 
         public void setPlateNumber(String plateNumber) {
             this.plateNumber = plateNumber;
+        }
+
+        public List<ResultsVo> getResults() {
+            return results;
+        }
+
+        public void setResults(List<ResultsVo> results) {
+            this.results = results;
+        }
+    }
+
+    public static class ResultsVo{
+        // {"width":510,"x":1228,"y":783,"height":387}
+        private RectVo rect;
+        // {"val":"black","des":"黑"}
+        private ColorVo color;
+        //斯柯达-明锐
+        private String subLogo;
+        //斯柯达
+        private String logo;
+        //斯柯达-明锐-2009,2008,2007
+        private String model;
+        //冀JEL594
+        private String plateNumber;
+
+        public RectVo getRect() {
+            return rect;
+        }
+
+        public void setRect(RectVo rect) {
+            this.rect = rect;
+        }
+
+        public ColorVo getColor() {
+            return color;
+        }
+
+        public void setColor(ColorVo color) {
+            this.color = color;
+        }
+
+        public String getSubLogo() {
+            return subLogo;
+        }
+
+        public void setSubLogo(String subLogo) {
+            this.subLogo = subLogo;
+        }
+
+        public String getLogo() {
+            return logo;
+        }
+
+        public void setLogo(String logo) {
+            this.logo = logo;
+        }
+
+        public String getModel() {
+            return model;
+        }
+
+        public void setModel(String model) {
+            this.model = model;
+        }
+
+        public String getPlateNumber() {
+            return plateNumber;
+        }
+
+        public void setPlateNumber(String plateNumber) {
+            this.plateNumber = plateNumber;
+        }
+    }
+
+    public static class RectVo{
+        private String width;
+        private String x;
+        private String y;
+        private String height;
+
+        public String getWidth() {
+            return width;
+        }
+
+        public void setWidth(String width) {
+            this.width = width;
+        }
+
+        public String getX() {
+            return x;
+        }
+
+        public void setX(String x) {
+            this.x = x;
+        }
+
+        public String getY() {
+            return y;
+        }
+
+        public void setY(String y) {
+            this.y = y;
+        }
+
+        public String getHeight() {
+            return height;
+        }
+
+        public void setHeight(String height) {
+            this.height = height;
+        }
+    }
+
+    public static class ColorVo{
+        //black
+        private String val;
+        //黑
+        private String des;
+
+        public String getVal() {
+            return val;
+        }
+
+        public void setVal(String val) {
+            this.val = val;
+        }
+
+        public String getDes() {
+            return des;
+        }
+
+        public void setDes(String des) {
+            this.des = des;
+        }
+    }
+
+    public static class TypeVo{
+        //vehicle
+        private String val;
+        //轿车
+        private String des;
+
+        public String getVal() {
+            return val;
+        }
+
+        public void setVal(String val) {
+            this.val = val;
+        }
+
+        public String getDes() {
+            return des;
+        }
+
+        public void setDes(String des) {
+            this.des = des;
         }
     }
 

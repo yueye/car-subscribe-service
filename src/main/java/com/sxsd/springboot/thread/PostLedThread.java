@@ -11,6 +11,7 @@ package com.sxsd.springboot.thread;
 
 import com.alibaba.fastjson.JSON;
 import com.sxsd.car.utils.ConvertUtils;
+import com.sxsd.car.utils.DateUtil;
 import com.sxsd.car.utils.http.HttpClientUtil;
 import com.sxsd.springboot.vo.ConsumerCallBackVo;
 import org.slf4j.Logger;
@@ -46,12 +47,25 @@ public class PostLedThread implements Runnable {
         }
         Map<String,String> params = new HashMap<>();
         params.put("ledLink",ledLink);
-        params.put("line1",map.get("plateNumber"));
-        params.put("line2","进来了");
+        params.put("line1",map.get("deviceId"));
+        params.put("line2",map.get("plateNumber"));
         params.put("type","2");
         logger.info("发送led网关 请求参数："+url+" "+ JSON.toJSONString(params));
         Map<String,String> s = HttpClientUtil.doGet(url,params);
         logger.info("发送led网关 返回结果："+ JSON.toJSONString(params));
+    }
+
+    public static void main(String [] args){
+        String url ="http://api.waterbears-era.com/led/sendContentToLed";
+        Map<String,String> params = new HashMap<>();
+        params.put("ledLink","http://47.104.190.7:30001");
+        params.put("line1","你好世界1");
+        params.put("line2","yoyoyo");
+        params.put("type","2");
+        System.out.println(DateUtil.currentTimeStamp().getTime());
+        Map<String,String> s = HttpClientUtil.doGet(url,params);
+        System.out.println(DateUtil.currentTimeStamp().getTime());
+        System.out.println(JSON.toJSONString(s));
     }
 
 }
