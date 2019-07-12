@@ -71,7 +71,7 @@ public class ConsumerCallBackVoThread implements Runnable {
                 logger.error("返回数据错误");
                 return ;
             }
-            String plateNumber = filteVehicle(vehiclePropsAndTraffic,map.get("plateNumber"));
+            String plateNumber = filterVehicle(vehiclePropsAndTraffic,map.get("plateNumber"));
             post2Led(map.get("deviceId"),plateNumber);
         }catch (Exception e){
             logger.info("线程异常"+e.getMessage());
@@ -90,7 +90,7 @@ public class ConsumerCallBackVoThread implements Runnable {
         logger.info("发送led网关 返回结果："+ JSON.toJSONString(params));
     }
 
-    private String filteVehicle(VehiclePropsAndTraffic vehiclePropsAndTraffic,String apiPlateNumber) {
+    protected String filterVehicle(VehiclePropsAndTraffic vehiclePropsAndTraffic, String apiPlateNumber) {
        List<VehiclePropsAndTraffic.Props> list = vehiclePropsAndTraffic.getData();
        List<String> res = new ArrayList<>();
        for(VehiclePropsAndTraffic.Props props:list){
