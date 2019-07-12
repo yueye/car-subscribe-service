@@ -105,7 +105,7 @@ public class ConsumerCallBackVoThread implements Runnable {
        if(res.size()>0){
            return res.get(0);
        }
-       return null;
+       return apiPlateNumber;
     }
 
     private VehiclePropsAndTraffic getVehiclePropsAndTraffic(String image) {
