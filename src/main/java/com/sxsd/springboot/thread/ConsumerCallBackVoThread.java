@@ -91,21 +91,24 @@ public class ConsumerCallBackVoThread implements Runnable {
     }
 
     protected String filterVehicle(VehiclePropsAndTraffic vehiclePropsAndTraffic, String apiPlateNumber) {
-       List<VehiclePropsAndTraffic.Props> list = vehiclePropsAndTraffic.getData();
-       List<String> res = new ArrayList<>();
-       for(VehiclePropsAndTraffic.Props props:list){
-            if("车牌".equals(props.getPlateNumber())){
-                continue;
-            }
-            res.add(props.getPlateNumber());
-       }
-       if(res.contains(apiPlateNumber)){
+        List<VehiclePropsAndTraffic.Props> list = vehiclePropsAndTraffic.getData();
+        List<String> res = new ArrayList<>();
+        for(VehiclePropsAndTraffic.Props props:list){
+           if(StringUtils.isBlank(props.getPlateNumber()) ||
+                   "车牌".equals(props.getPlateNumber()) ||
+                   "null".equals(props.getPlateNumber())){
+               continue;
+           }
+           res.add(props.getPlateNumber());
+        }
+        logger.info("本地识别结果--->"+apiPlateNumber+" 云端结果--->"+JSON.toJSONString(res));
+        if(res.contains(apiPlateNumber)){
            return apiPlateNumber;
-       }
-       if(res.size()>0){
-           return res.get(0);
-       }
-       return apiPlateNumber;
+        }
+        if(res.size()>0){
+           return StringUtils.join(res,",");
+        }
+        return apiPlateNumber;
     }
 
     private VehiclePropsAndTraffic getVehiclePropsAndTraffic(String image) {

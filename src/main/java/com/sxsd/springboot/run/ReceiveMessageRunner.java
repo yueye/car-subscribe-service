@@ -43,7 +43,7 @@ public class ReceiveMessageRunner implements CommandLineRunner {
     private static final String APP_KEY = ResourceBundleUtil.get("ezvizopen.appkey");
     private static final String APP_SECRET = ResourceBundleUtil.get("ezvizopen.appSecret");
     private static final Logger log =  LoggerFactory.getLogger(ReceiveMessageRunner.class);
-    private static final String GROUP = "group4";
+    private static final String GROUP = "group3";
     private static final String PATH = "https://open.ys7.com"; //开放平台的url,这是test环境的url https://test.ys7.com:65
     private static final long consumeIntervalTime = 200;
     private static final String VEHICLE = "ys.open.vehicle";
@@ -68,7 +68,7 @@ public class ReceiveMessageRunner implements CommandLineRunner {
     }
 
     public static void init() {
-        // 设置你的appkey,appSecret,group
+        // 设置你的appKey,appSecret,group
         StandardConsumerMessage consumerMessage = new StandardConsumerMessage(PATH, APP_KEY, APP_SECRET, GROUP);
         // 设置调用接口的间隔时间,ms
         consumerMessage.setConsumeIntervalTime(consumeIntervalTime);
