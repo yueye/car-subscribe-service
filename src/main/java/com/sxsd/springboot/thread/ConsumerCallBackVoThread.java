@@ -115,7 +115,7 @@ public class ConsumerCallBackVoThread implements Runnable {
         params.put("dataType","0");
         params.put("image",image);
         logger.info("请求萤石云车辆属性识别接口："+vehicle_props_url+" "+JSON.toJSONString(params));
-        Map<String,String> res = HttpClientUtil.doPost(url,params);
+        Map<String,String> res = HttpClientUtil.doPost(vehicle_props_url,params);
         String result = res.get("result");
         VehiclePropsAndTraffic vehiclePropsAndTraffic = JSON.parseObject(result, VehiclePropsAndTraffic.class);
         logger.info("请求萤石云车辆属性识别接口结果："+JSON.toJSONString(vehiclePropsAndTraffic));
