@@ -50,11 +50,20 @@ public class ConsumerCallBackVoThread implements Runnable {
     @Override
     public void run() {
         try{
-            //非车牌识别&非车牌识别+车型识别
-            if(!Constants.VEHICLE_PLATE.equals(consumerCallBackVo.getHeader().getType()) &&
-                !Constants.CAR_API.equals(consumerCallBackVo.getHeader().getType())){
+            //设备上下线通知
+            if(Constants.ON_OFF_LINE.equals(consumerCallBackVo.getHeader().getType())){
+                logger.info("设备上下线通知：设备号："+consumerCallBackVo.getHeader().getDeviceId()+
+                        "--状态：" +ConvertUtils.onOffLine(consumerCallBackVo.getBody().getMsgType())+
+                        "--触发时间："+consumerCallBackVo.getBody().getOccurTime()+"");
                 return ;
             }
+            //本地消息通知
+            if(Constants.IS_API.equals(consumerCallBackVo.getHeader().getType())){
+                Map<String,String> map = ConvertUtils.getVehicle(consumerCallBackVo);
+                logger.info("本地消息："+map.get("plateNumber")+"--"+map.get("direction"));
+                return ;
+            }
+            //车牌识别&车牌识别+车型识别
             Map<String,String> map = ConvertUtils.getVehicle(consumerCallBackVo);
             if(!map.containsKey("deviceId") || !map.containsKey("plateNumber")){
                 logger.info("数据错误，不包含设备或者车牌");

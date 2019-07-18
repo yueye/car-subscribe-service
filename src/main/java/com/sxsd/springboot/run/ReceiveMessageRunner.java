@@ -130,7 +130,7 @@ public class ReceiveMessageRunner implements CommandLineRunner {
             log.info("msgSize:{},msg:{}", msgs.size(), msgs.subList(0, 100));
         }
         for (Object object : msgs) {
-            log.info("原始消息："+JSON.toJSONString(object));
+            log.info("原始消息："+object.toString());
             ConsumerCallBackVo vo = JSON.parseObject(object.toString(),ConsumerCallBackVo.class);
             taskExecutor.execute(new ConsumerCallBackVoThread(log,redisMsg,vo));
         }

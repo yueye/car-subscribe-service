@@ -1,5 +1,7 @@
 package com.sxsd.car.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.sxsd.springboot.vo.EventNotificationAlert;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -14,7 +16,7 @@ import java.util.regex.Pattern;
 public class XMLObjectUtils {
 
     public static void main(String [] args){
-        File file = new File("C:\\Users\\admin\\Desktop\\x项目\\xml解析问题\\xml解析错误2.txt");
+        File file = new File("C:\\Users\\admin\\Desktop\\x项目\\xml解析问题\\isapi.TXT");
         Long filelength = file.length();
         byte[] filecontent = new byte[filelength.intValue()];
         try {
@@ -27,9 +29,10 @@ public class XMLObjectUtils {
             e.printStackTrace();
         }
         String s = new String(filecontent);
-        String ss = "\u0010B]_Q`Q";
-        System.out.println("过滤:"+stripNonValidXMLCharacters(ss));
-
+        System.out.println(JSON.toJSONString(s));
+        s = ConvertUtils.stripNonValidXMLCharacters(s).replaceAll("`","");
+        s = s.replaceAll("[\\x00-\\x08\\x0b-\\x0c\\x0e-\\x1f]", "");
+        System.out.println(s);
 //        System.out.println("原始:"+s);
 //        System.out.println("原始:"+replaceUnicode(s));
 //
@@ -45,8 +48,8 @@ public class XMLObjectUtils {
 //                "</ANPR>" +
 //                "</EventNotificationAlert>";
 //        System.out.println(str);
-       // EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)xmlToObj(EventNotificationAlert.class,new String(filecontent));
-        // System.out.println(JSON.toJSONString(eventNotificationAlert));
+        EventNotificationAlert eventNotificationAlert = (EventNotificationAlert)xmlToObj(EventNotificationAlert.class,s);
+       System.out.println(eventNotificationAlert.getANPR().getEntranceInfo().getDirection());
     }
 
 
@@ -61,23 +64,6 @@ public class XMLObjectUtils {
         return matcher.replaceAll("");
     }
 
-    public static String stripNonValidXMLCharacters(String in) {
-        StringBuffer out = new StringBuffer(); // Used to hold the output.
-        char current; // Used to reference the current character.
-
-        if (in == null || ("".equals(in))) return ""; // vacancy test.
-        for (int i = 0; i < in.length(); i++) {
-            current = in.charAt(i); // NOTE: No IndexOutOfBoundsException caught here; it should not happen.
-            if ((current == 0x9) ||
-                    (current == 0xA) ||
-                    (current == 0xD) ||
-                    ((current >= 0x20) && (current <= 0xD7FF)) ||
-                    ((current >= 0xE000) && (current <= 0xFFFD)) ||
-                    ((current >= 0x10000) && (current <= 0x10FFFF)))
-                out.append(current);
-        }
-        return out.toString();
-    }
     /**
      * 方法名称: xmlMappedObj<br>
      * 描述：xml 自动映射成对对象Object ：

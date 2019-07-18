@@ -16,9 +16,13 @@ package com.sxsd.base;
  * @create 2019/7/4
  */
 public class Constants {
+    //上下线通知
     public static final String ON_OFF_LINE = "ys.onoffline";
+    //车牌识别
     public static final String VEHICLE_PLATE = "ys.open.vehicle";
+    //本地消息
     public static final String IS_API = "ys.open.isapi";
+    //车牌+车辆信息
     public static final String CAR_API = "ys.open.car";
 
     public Constants() {

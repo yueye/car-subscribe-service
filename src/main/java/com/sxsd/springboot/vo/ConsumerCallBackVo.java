@@ -74,7 +74,7 @@ public class ConsumerCallBackVo {
         private String regTime;
         //ip地址 60.247.104.85
         private String natIp;
-        //消息类型 OFFLINE
+        //消息类型 ONLINE-上线 OFFLINE-下线
         private String msgType;
         //序列号 D28746868
         private String subSerial;
