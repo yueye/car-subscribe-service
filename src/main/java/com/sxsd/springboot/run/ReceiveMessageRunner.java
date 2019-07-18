@@ -75,7 +75,7 @@ public class ReceiveMessageRunner implements CommandLineRunner {
         // 设置消费消息的回调接口,建议把消息放入本地队列,不要在回调函数里做业务处理.
         consumerMessage.setConsumerCallBack(msg -> {
             try {
-                log.info("查询消息通道："+msg.size());
+//                log.info("查询消息通道："+msg.size());
                 if(msg.size()>0){
                     msgQueue.put(msg);
                 }
