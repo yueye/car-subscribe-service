@@ -20,6 +20,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <jackson-jaxrs.version>1.7.1</jackson-jaxrs.version>
+        <fastjson.version>1.2.39</fastjson.version>
+        <commons-httpclient.version>3.1</commons-httpclient.version>
+        <commons-io.version>1.3.2</commons-io.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-collections.version>3.2.1</commons-collections.version>
+        <ezviz-open-sdk.version>beta1.0.2</ezviz-open-sdk.version>
+        <ysmq-subscribe-sdk.version>1.0.2-RELEASE</ysmq-subscribe-sdk.version>
+        <lombok.version>1.16.20</lombok.version>
+        <okhttp.version>3.9.1</okhttp.version>
+        <spring-boot-maven-plugin.version>1.4.2.RELEASE</spring-boot-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -39,7 +50,7 @@
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
-            <version>1.7.1</version>
+            <version>${jackson-jaxrs.version}</version>
         </dependency>
 
         <dependency>
@@ -61,28 +72,28 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.39</version>
+            <version>${fastjson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <version>${commons-httpclient.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.3.2</version>
+            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <version>${commons-lang.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
+            <version>${commons-collections.version}</version>
         </dependency>
 
         <dependency>
@@ -98,14 +109,14 @@
         <dependency>
             <groupId>com.ezviz.open</groupId>
             <artifactId>ezviz-open-sdk</artifactId>
-            <version>beta1.0.2</version> <!--自定义-->
+            <version>${ezviz-open-sdk.version}</version> <!--自定义-->
             <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
             <systemPath>${basedir}/lib/ezviz-open-sdk-beta1.0.2.jar</systemPath> <!--项目根目录下的lib文件夹下-->
         </dependency>
         <dependency>
             <groupId>com.ys</groupId>
             <artifactId>ysmq-subscribe-sdk</artifactId>
-            <version>1.0.2-RELEASE</version> <!--自定义-->
+            <version>${ysmq-subscribe-sdk.version}</version> <!--自定义-->
             <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
             <systemPath>${basedir}/lib/ysmq-subscribe-sdk-1.0.2-RELEASE.jar</systemPath> <!--项目根目录下的lib文件夹下-->
         </dependency>
@@ -113,12 +124,12 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.20</version>
+            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>3.9.1</version>
+            <version>${okhttp.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -138,7 +149,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.4.2.RELEASE</version>
+                <version>${spring-boot-maven-plugin.version}</version>
                 <configuration>
                     <mainClass>com.sxsd.CarSubscribeServiceApplication</mainClass>
                     <layout>JAR</layout>
