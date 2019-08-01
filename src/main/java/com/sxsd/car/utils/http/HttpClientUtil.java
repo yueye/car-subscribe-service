@@ -1,6 +1,7 @@
 package com.sxsd.car.utils.http;
 
 import com.sxsd.car.utils.DateUtil;
+import com.sxsd.car.utils.RetryUtil;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -208,7 +209,40 @@ public class HttpClientUtil {
         }  
         return map;  
     }
-    
+
+    public static Map<String,String> retryDoGet(String url, Map<String, String> param,Integer retryTimes) {
+        return retryDoGet(url,param, retryTimes,1000L);
+    }
+    public static Map<String,String> retryDoGet(String url, Map<String, String> param,Integer retryTimes,Long delay) {
+        Map<String,String> res = doGet(url,param);
+        if(!HttpStatus.OK.equals(res.get("statusCode"))){
+            Object o = RetryUtil.setRetryTimes(retryTimes,delay).retry(new HttpClientUtil(),url,param,retryTimes);
+            if(o == null){
+                return res;
+            }else{
+                return (Map<String,String>)o;
+            }
+        }
+        return res;
+    }
+
+    public static Map<String,String> retryDoPost(String url, Map<String, String> param,Integer retryTimes) {
+        return retryDoPost(url,param, retryTimes,1000L);
+    }
+
+    public static Map<String,String> retryDoPost(String url, Map<String, String> param,Integer retryTimes,Long delay) {
+        Map<String,String> res = doPost(url,param);
+        if(!HttpStatus.OK.equals(res.get("statusCode"))){
+            Object o = RetryUtil.setRetryTimes(retryTimes,delay).retry(new HttpClientUtil(),url,param,retryTimes);
+            if(o == null){
+                return res;
+            }else{
+                return (Map<String,String>)o;
+            }
+        }
+        return res;
+    }
+
     /**
      * Description: 释放资源
      * @param httpResponse

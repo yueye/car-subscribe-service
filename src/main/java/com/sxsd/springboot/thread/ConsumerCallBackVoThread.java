@@ -95,7 +95,7 @@ public class ConsumerCallBackVoThread implements Runnable {
         params.put("line2",plateNumber);
         params.put("type","2");
         logger.info("发送led网关 请求参数："+url+" "+ JSON.toJSONString(params));
-        Map<String,String> s = HttpClientUtil.doGet(url,params);
+        Map<String,String> s = HttpClientUtil.retryDoGet(url,params,3);
         logger.info("发送led网关 返回结果："+ JSON.toJSONString(params));
     }
 
