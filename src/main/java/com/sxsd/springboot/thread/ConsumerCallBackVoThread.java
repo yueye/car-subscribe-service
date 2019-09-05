@@ -81,6 +81,7 @@ public class ConsumerCallBackVoThread implements Runnable {
                 return ;
             }
             String plateNumber = filterVehicle(vehiclePropsAndTraffic,map.get("plateNumber"));
+            logger.info("=====================过滤后的返回结果:"+plateNumber+" ======================");
             post2Led(map.get("deviceId"),plateNumber);
         }catch (Exception e){
             logger.info("线程异常"+e.getMessage());
@@ -110,7 +111,7 @@ public class ConsumerCallBackVoThread implements Runnable {
            }
            res.add(props.getPlateNumber());
         }
-        logger.info("本地识别结果--->"+apiPlateNumber+" 云端结果--->"+JSON.toJSONString(res));
+        logger.info("=====================本地识别结果--->"+apiPlateNumber+" 云端结果--->"+JSON.toJSONString(res)+" ======================");
         if(res.contains(apiPlateNumber)){
            return apiPlateNumber;
         }
@@ -131,6 +132,12 @@ public class ConsumerCallBackVoThread implements Runnable {
         String result = res.get("result");
         VehiclePropsAndTraffic vehiclePropsAndTraffic = JSON.parseObject(result, VehiclePropsAndTraffic.class);
         logger.info("请求萤石云车辆属性识别接口结果："+JSON.toJSONString(vehiclePropsAndTraffic));
+        StringBuffer buffer = new StringBuffer();
+        for(VehiclePropsAndTraffic.Props props:vehiclePropsAndTraffic.getData()){
+            buffer.append(props.getPlateNumber()+" "+props.getVehicleLogo()+" "+props.getVehicleModel()+" "+
+                    props.getVehicleSublogo()+" "+props.getVehicleType().getDes()+" "+props.getYellowLabel().getDes()+"\r\n");
+        }
+        logger.info("==================请求萤石云车辆属性识别接口结果简化:"+buffer.toString()+" =============================");
         return vehiclePropsAndTraffic;
     }
 

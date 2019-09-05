@@ -125,10 +125,10 @@ public class ReceiveMessageRunner implements CommandLineRunner {
      */
     void userProcessMsgFunction(List<Object> msgs) {
         log.info("异步处理消息,消息数量:", msgs.size());
-        if (msgs.size() > 100) {
-            //消息太多,只打印前100个
-            log.info("msgSize:{},msg:{}", msgs.size(), msgs.subList(0, 100));
-        }
+//        if (msgs.size() > 100) {
+//            //消息太多,只打印前100个
+//            log.info("msgSize:{},msg:{}", msgs.size(), msgs.subList(0, 100));
+//        }
         for (Object object : msgs) {
             log.info("原始消息："+object.toString());
             ConsumerCallBackVo vo = JSON.parseObject(object.toString(),ConsumerCallBackVo.class);
